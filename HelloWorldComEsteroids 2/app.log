@@ -1,0 +1,9 @@
+2025-02-24 19:01:41 [main] INFO  fiap.tds.Main - Sistema Iniciando... 
+2025-02-24 19:01:52 [main] ERROR fiap.tds.Main - Erro ao cadastrar coleção 
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Scanner.java:964) ~[?:?]
+	at java.util.Scanner.next(Scanner.java:1619) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2284) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2238) ~[?:?]
+	at fiap.tds.Main.CadastrarColecao(Main.java:61) [classes/:?]
+	at fiap.tds.Main.main(Main.java:33) [classes/:?]
