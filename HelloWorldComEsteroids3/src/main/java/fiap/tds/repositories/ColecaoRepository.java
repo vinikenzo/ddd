@@ -2,6 +2,7 @@ package fiap.tds.repositories;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import fiap.tds.Infraestructure.DatabaseConfig;
 import fiap.tds.Main;
 import fiap.tds.entities.Colecao;
 import fiap.tds.extentions.LocalDateTimeGsonAdapter;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,28 @@ public class ColecaoRepository
 
     @Override
     public List<Colecao> listarTodos() {
-        return colecoes;
+        var query = "SELECT * FROM colecao";
+
+        try{
+            var connection =  DatabaseConfig.getConnection();
+            var statement = connection.prepareStatement(query);
+            var result = statement.executeQuery();
+            while(result.next()) {
+
+                      var colecao =  new Colecao();
+                      colecao.setId(result.getInt("id"));
+                      colecao.setDeleted(result.getBoolean("deleted"));
+                      colecao.setNome(result.getString("nome"));
+                      colecao.setCodigo(result.getString("codigo"));
+                      colecao.setDataLancamento(result.getString("data de lançamento"));
+
+            }
+
+            }
+        catch (SQLException e){}
+
+        System.out.println("Erro ao importar o arquivo");
+
     }
 
     @Override
